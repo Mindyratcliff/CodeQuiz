@@ -28,18 +28,6 @@ function setTime() {
 
 //Create the Welcome page of the quiz
 
-var quizDiv = document.createElement("div");
-document.body.appendChild(quizDiv);
-
-
-
-var h1El = document.createElement("h1");
-h1El.textContent = "Welcome to the Coding Challenge!";
-document.body.appendChild(h1El);
-
-var h3El = document.createElement("h3");
-h3El.textContent = "Try to answer the following code-related questions within the designated time frame. Keep in mind that for every incorrect answer you will lose 10 seconds!";
-document.body.appendChild(h3El);
 
 
 
