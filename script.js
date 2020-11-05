@@ -3,6 +3,7 @@
 var body = document.body;
 var quizBody = document.getElementById("quizBody");
 var questionBody = document.getElementById("questionBody");
+var scoreEl = document.getElementById("score");
 var startQuiz = document.querySelector("#start");
 var welcomeText = document.createElement("p");
 var timeDisplay = document.getElementById("time");
@@ -11,7 +12,15 @@ var buttonEl1 = document.getElementById("button1");
 var buttonEl2 = document.getElementById("button2");
 var buttonEl3 = document.getElementById("button3");
 var buttonEl4 = document.getElementById("button4");
+var userInput = document.createElement("p");
+userInput.setAttribute("class", "result");
+nameInput.setAttribute("type", "text");
+nameInput.textContent = "Enter your initials";
+var submit = document.createElement("button");
+submit.setAttribute("type", "submit");
+submit.textContent = "Submit";
 var currentQuestion = 1;
+var answerArray = [];
 
 var userScore = 0;
 
@@ -26,36 +35,31 @@ var questionBank = {
 };
 
 var answerBank = {
-  answerSet1: {
-    "In the footer": 0,
-    "In the body": 0,
-    "In the head": 1,
-    "Anywhere in the HTML": 0,
-  },
-  answerSet2: {
-    CAMELCASE: 0,
-    camelcase: 0,
-    cAmElCaSe: 0,
-    camelCase: 1,
-  },
-  answerSet3: {
-    "The light that shines from your webcam": 0,
-    "An unordered list": 0,
-    "A collection of values in JavaScript": 1,
-    "The return value of a confirm": 0,
-  },
-  answerSet4: {
-    "A counter in the for loop that counts the number of passes": 1,
-    "An alert": 0,
-    "A 3D element": 0,
-    "A return value": 0,
-  },
-  answerSet5: {
-    "Key, value, storage, local": 0,
-    "Margin, pudding, taco, element": 0,
-    "Paragraph, background, body, head": 0,
-    "Content, padding, border, margin": 1,
-  },
+  answerSet1: [
+    "In the footer",
+    "In the body",
+    "In the head",
+    "Anywhere in the HTML",
+  ],
+  answerSet2: ["CAMELCASE", "camelcase", "cAmElCaSe", "camelCase"],
+  answerSet3: [
+    "The light that shines from your webcam",
+    "An unordered list",
+    "A collection of values in JavaScript",
+    "The return value of a confirm",
+  ],
+  answerSet4: [
+    "A counter in the for loop that counts the number of passes",
+    "An alert",
+    "A 3D element",
+    "A return value",
+  ],
+  answerSet5: [
+    "Key, value, storage, local",
+    "Margin, pudding, taco, element",
+    "Paragraph, background, body, head",
+    "Content, padding, border, margin",
+  ],
 };
 
 //Keep time
@@ -90,9 +94,10 @@ welcomeText.innerHTML =
 quizBody.appendChild(welcomeText);
 
 //Make a start button to begin the quiz
-function quizRunning() {
+function quizRunning(clickedEvent) {
   quizBody.removeChild(welcomeText);
   setTime();
+  clickedEvent.target.textContent;
   displayQuestions("question1");
   displayAnswers("answerSet1");
   currentQuestion++;
@@ -103,8 +108,8 @@ startQuiz.addEventListener("click", quizRunning);
 //Function to generate answers
 
 function displayAnswers(possibleAnswers) {
-  //Extract answers for use in function
-  var answerKeys = Object.keys(answerBank[possibleAnswers]);
+  //Extract keys for use in the function
+  var answerKeys = answerBank[possibleAnswers];
 
   //Pull answers from object list
   buttonEl1.textContent = answerKeys[0];
@@ -118,37 +123,62 @@ function displayAnswers(possibleAnswers) {
   buttonEl2.addEventListener("click", nextQuestion);
   buttonEl3.addEventListener("click", nextQuestion);
   buttonEl4.addEventListener("click", nextQuestion);
-  
 }
 
-function nextQuestion(clickEvent) {
-  userScore = userScore + (answerBank["answerSet" + currentQuestion][clickEvent.target.textContent]);
-  localStorage.setItem("User Score", userScore);
-  //Display the next question and answer set
-    displayQuestions("question" + currentQuestion);
-    displayAnswers("answerSet" + currentQuestion);
-    currentQuestion++;
-   if (currentQuestion === 5){
-    //Collect and display user initials and high score
-    var userInput = document.createElement("p");
-    userInput.setAttribute("class", "result");
-    nameInput.setAttribute("type", "text");
-    nameInput.textContent = "Enter your initials";
-    quizBody.appendChild(nameInput);
-    nameInput.addEventListener("input", e)
+var buttons = document.querySelectorAll(".question");
+var buttonsCount = buttons.length;
+for (var i = 0; i < buttonsCount; i += 1) {
+  buttons[i].onclick = function () {
+    answerArray.push(this.id);
+  };
+}
 
-    //Generate a submit button to store user data 
-    var submit = document.createElement("button");
-    submit.setAttribute("type", "submit");
-    submit.textContent = "Submit";
+function scoreKeeper() {
+  alert(answerArray);
+  if (answerArray[0] === "button3") {
+    userScore++;
+  }
+  if (answerArray[1] === "button4") {
+    userScore++;
+  }
+  if (answerArray[2] === "button3") {
+    userScore++;
+  }
+  if (answerArray[3] === "button1") {
+    userScore++;
+  }
+  if (answerArray[4] === "button4") {
+    userScore++;
+  }
+  localStorage.setItem("User Score", userScore);
+  scoreEl.textContent = "Score is " + userScore;
+}
+
+function nextQuestion() {
+  //Collect user answers through the click event
+  scoreKeeper();
+  //Display the next question and answer set
+  displayQuestions("question" + currentQuestion);
+  displayAnswers("answerSet" + currentQuestion);
+  currentQuestion++;
+  if (currentQuestion === 6) {
+    //Collect and display user initials and high score
+
+    quizBody.appendChild(nameInput);
+    nameInput.addEventListener("input", nameWriter);
+
+    //Generate a submit button to store user data
+
     quizBody.appendChild(submit);
     submit.addEventListener("click", e);
-    function e() {
-      userInput.textContent = e.data
-      localStorage.setItem("User Name", e.data);
+    function nameWriter () {
+      var nameDetails = document.getElementById("nameDetails");
+      nameDetails.textContent =  nameInput.value;
+      localStorage.setItem("User Name", nameInput.value);
+
+      document.classList.remove(quizBody);
+      
     }
-    
-    
   }
 }
 
