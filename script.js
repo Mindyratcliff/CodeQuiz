@@ -133,8 +133,9 @@ for (var i = 0; i < buttonsCount; i += 1) {
   };
 }
 
+//Keep score
 function scoreKeeper() {
-  alert(answerArray);
+  //If the user answers the right answer, user is awared 1 point.
   if (answerArray[0] === "button3") {
     userScore++;
   }
@@ -154,9 +155,27 @@ function scoreKeeper() {
   scoreEl.textContent = "Score is " + userScore;
 }
 
+function loseTime (){
+  if (answerArray[0] !== "button3") {
+    secondsLeft--;
+  }
+  if (answerArray[1] !== "button4") {
+    secondsLeft--;
+  }
+  if (answerArray[2] !== "button3") {
+    secondsLeft--;
+  }
+  if (answerArray[3] !== "button1") {
+    secondsLeft--;
+  }
+  if (answerArray[4] !== "button4") {
+    secondsLeft--;
+  }
+}
+
 function nextQuestion() {
-  //Collect user answers through the click event
-  scoreKeeper();
+  //Check for incorrect answers and remove time
+  loseTime();
   //Display the next question and answer set
   displayQuestions("question" + currentQuestion);
   displayAnswers("answerSet" + currentQuestion);
@@ -170,13 +189,15 @@ function nextQuestion() {
     //Generate a submit button to store user data
 
     quizBody.appendChild(submit);
-    submit.addEventListener("click", e);
+    submit.addEventListener("click", scoreKeeper);
+    
     function nameWriter () {
       var nameDetails = document.getElementById("nameDetails");
       nameDetails.textContent =  nameInput.value;
       localStorage.setItem("User Name", nameInput.value);
+      
 
-      document.classList.remove(quizBody);
+      
       
     }
   }
