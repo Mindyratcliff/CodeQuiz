@@ -1,3 +1,6 @@
+
+/* Center align the headers */
+
 h1 {
 
     margin-right: auto;
@@ -16,14 +19,24 @@ h2 {
     text-align: center;
 }
 
-#button {
+/* Modify the question buttons */
 
-    background-color: blueviolet;
+.question {
 
+    border: 2px solid purple;
+    background-color: seashell;
+    border-radius: 12px;
 
 
 }
 
-.li {
+/* Allow the buttons to change when the user hovers over them */
 
+.question:hover {
+
+    color:white;
+
+    transition-duration: 0.4s;
+    background-color: purple;
 }
+

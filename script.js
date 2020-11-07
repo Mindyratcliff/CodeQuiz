@@ -21,7 +21,6 @@ submit.setAttribute("type", "submit");
 submit.textContent = "Submit";
 var currentQuestion = 1;
 var answerArray = [];
-
 var userScore = 0;
 
 //Questions for the quiz
@@ -134,6 +133,7 @@ for (var i = 0; i < buttonsCount; i += 1) {
 }
 
 //Keep score
+
 function scoreKeeper() {
   //If the user answers the right answer, user is awared 1 point.
   if (answerArray[0] === "button3") {
@@ -155,7 +155,8 @@ function scoreKeeper() {
   scoreEl.textContent = "Score is " + userScore;
 }
 
-function loseTime (){
+//If the user answers a question incorrectly, the user loses time off the overall time.
+function loseTime() {
   if (answerArray[0] !== "button3") {
     secondsLeft--;
   }
@@ -173,13 +174,18 @@ function loseTime (){
   }
 }
 
+//Make it possible to display the next question and answer options
+
 function nextQuestion() {
-  //Check for incorrect answers and remove time
-  loseTime();
-  //Display the next question and answer set
-  displayQuestions("question" + currentQuestion);
-  displayAnswers("answerSet" + currentQuestion);
-  currentQuestion++;
+  if (currentQuestion <= 5) {
+    //Check for incorrect answers and remove time
+    loseTime();
+    //Display the next question and answer set
+    questionBody.textContent = " ";
+    displayQuestions("question" + currentQuestion);
+    displayAnswers("answerSet" + currentQuestion);
+    currentQuestion++;
+  }
   if (currentQuestion === 6) {
     //Collect and display user initials and high score
 
@@ -190,18 +196,14 @@ function nextQuestion() {
 
     quizBody.appendChild(submit);
     submit.addEventListener("click", scoreKeeper);
-    
-    function nameWriter () {
-      var nameDetails = document.getElementById("nameDetails");
-      nameDetails.textContent =  nameInput.value;
-      localStorage.setItem("User Name", nameInput.value);
-      
 
-      
-      
+    //Display high score with initials
+
+    function nameWriter() {
+      var nameDetails = document.getElementById("nameDetails");
+      nameDetails.textContent = nameInput.value;
+      localStorage.setItem("User Name", nameInput.value);
     }
   }
+  
 }
-
-
-//Display high score with initials
