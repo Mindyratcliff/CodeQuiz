@@ -17,7 +17,7 @@
 
  ## Usage
 
- ![Image of Code Quiz](hhttps://github.com/Mindyratcliff/CodeQuiz/blob/main/CodeQuizImage.jpg)
+ ![Image of Code Quiz](https://github.com/Mindyratcliff/CodeQuiz/blob/main/CodeQuizImage.jpg)
 
  The application may be accessed here [CodeQuiz](https://mindyratcliff.github.io/CodeQuiz/)
 
