@@ -19,7 +19,7 @@
 
  ![Image of Code Quiz](hhttps://github.com/Mindyratcliff/CodeQuiz/blob/main/CodeQuizImage.jpg)
 
- The application may be accessed here ![CodeQuiz](https://mindyratcliff.github.io/CodeQuiz/)
+ The application may be accessed here [CodeQuiz](https://mindyratcliff.github.io/CodeQuiz/)
 
  
 
