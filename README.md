@@ -1,7 +1,7 @@
 # CodeQuiz
 
 
- This Code Quiz was created as a tool to test one's knowledge about coding, particularly HTML, CSS, and JavaScript. The user is presented with a start button, and when that start button is pressed, a timer begins while the user is presented with a coding-related question. As the user answers the questions, score is kept. When the user answers the question incorrectly, time is taken from the available 60 seconds, giving the user less time to complete the coding quiz. At the end, the user may enter their initials or name in an input box and have their name displayed with their score. 
+ This Code Quiz was created as a tool to test one's knowledge about coding, particularly HTML, CSS, and JavaScript. The user is presented with a start button, and when that start button is pressed, a timer begins while the user is presented with a coding-related question. As the user answers the questions, score is kept. When the user answers the question incorrectly, time is taken from the available 60 seconds, giving the user less time to complete the coding quiz. At the end, the user may enter their initials or name in an input box and have their name displayed with their score. To start the quiz again, simply refresh the page.
 
  ## Table of Contents
 
